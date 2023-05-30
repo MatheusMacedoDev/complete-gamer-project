@@ -20,5 +20,6 @@ namespace complete_gamer_project.Models
 		[Required]
 		[ForeignKey("Team")]
 		public int TeamId { get; private set; }	
+		public Team Team { get; private set; }
 	}
 }
