@@ -14,5 +14,11 @@ namespace complete_gamer_project.Models
 		public string Image { get; private set; }
 		
 		public ICollection<Player> Players { get; private set; }
+		
+		public Team(string name, string image) 
+		{
+			this.Name = name;
+			this.Image = image;
+		}
 	}
 }
