@@ -27,7 +27,34 @@ namespace complete_gamer_project.Controllers
 		public IActionResult Register(IFormCollection form) 
 		{
 			string name = form["Name"].ToString();
-			string imageUrl = form["Image"].ToString();
+			string imageUrl;
+			
+			IFormFileCollection files = form.Files;
+			if (files.Count > 0) 
+			{
+				IFormFile file = files[0];
+				
+				string folderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/Teams");
+				
+				if (!Directory.Exists(folderPath)) 
+				{
+					Directory.CreateDirectory(folderPath);
+				}
+				
+				string filePath = Path.Combine(folderPath, file.FileName);				
+				using (FileStream stream = new FileStream(filePath, FileMode.Create)) 
+				{
+					file.CopyTo(stream);
+				}
+				
+				imageUrl = file.FileName;
+			}
+			else 
+			{
+				imageUrl = "standard.png";
+			}
+			
+			
 			Team insertingTeam = new Team(name, imageUrl);
 			
 			context.Add(insertingTeam);

@@ -6,12 +6,12 @@
 
 <h1>Tela de Equipes</h1>
 
-<form method="post" action='@Url.Action("Register")'>
+<form method="post" action='@Url.Action("Register")' enctype="multipart/form-data">
     <label for="">Nome</label>
     <input type="text" name="Name">
 
     <label for="">Imagem</label>
-    <input type="text" name="Image">
+    <input type="file" name="Image">
 
     <button type="submit">Cadastrar</button>
 </form>
@@ -28,7 +28,7 @@
                 <td>@team.Id</td>
                 <td>@team.Name</td>
                 <td>
-                    <img src="@team.Image" alt="Logotipo da equipe">
+                    <img src="/img/Teams/@team.Image" alt="Logotipo da equipe" width="50px">
                 </td>
             </tr>
         }
