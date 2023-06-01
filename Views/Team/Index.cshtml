@@ -29,6 +29,7 @@
                 <td>@team.Name</td>
                 <td>
                     <img src="/img/Teams/@team.Image" alt="Logotipo da equipe" width="50px">
+                    <a asp-area="" asp-controller="Team" asp-action="Delete" asp-route-id="@team.Id">Deletar</a>
                 </td>
             </tr>
         }
