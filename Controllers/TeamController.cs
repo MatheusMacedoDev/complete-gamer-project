@@ -62,6 +62,15 @@ namespace complete_gamer_project.Controllers
 			
 			return LocalRedirect("~/Team/List");
 		}
+		
+		[Route("Delete")]
+		public IActionResult Delete(int id) 
+		{
+			Team findedTeam = context.Teams.First(team => team.Id == id);
+			context.Remove(findedTeam);
+			context.SaveChanges();
+			return LocalRedirect("~/Team/Delete");
+		}
 
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error()
