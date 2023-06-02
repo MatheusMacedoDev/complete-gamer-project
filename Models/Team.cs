@@ -20,5 +20,12 @@ namespace complete_gamer_project.Models
 			this.Name = name;
 			this.Image = image;
 		}
+		
+		public Team(int id, string name, string image) 
+		{
+			this.Id = id;
+			this.Name = name;
+			this.Image = image;
+		}
 	}
 }

@@ -30,6 +30,63 @@ namespace complete_gamer_project.Controllers
 			string imageUrl;
 			
 			IFormFileCollection files = form.Files;
+			imageUrl = uploadImage(files, "standard.png");
+			
+			Team insertingTeam = new Team(name, imageUrl);
+			
+			context.Add(insertingTeam);
+			context.SaveChanges();
+			
+			return LocalRedirect("~/Team/List");
+		}
+		
+		[Route("Delete/{id}")]
+		public IActionResult Delete(int id) 
+		{
+			Team findedTeam = context.Teams.First(team => team.Id == id);
+			context.Remove(findedTeam);
+			context.SaveChanges();
+			return LocalRedirect("~/Team/List");
+		}
+		
+		[Route("Update")]
+		public IActionResult Update(IFormCollection form)  
+		{
+			int id = int.Parse(form["Id"].ToString());
+			string name = form["Name"].ToString();
+			string imageUrl = form["ImageUrl"].ToString(); 
+			
+			IFormFileCollection files = form.Files;
+			imageUrl = uploadImage(files, imageUrl);
+			
+			Team editedTeam = new Team(id, name, imageUrl);
+			
+			context.Teams.Update(editedTeam);
+			context.SaveChanges();
+			
+			return LocalRedirect("~/Team/List");
+		}
+		
+		[Route("Edit/{id}")]
+		public IActionResult Edit(int id) 
+		{
+			Team team = context.Teams.First(team => team.Id == id);
+			
+			ViewBag.Team = team;
+			
+			return View("Edit");
+		}
+
+		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+		public IActionResult Error()
+		{
+			return View("Error!");
+		}
+		
+		private string uploadImage(IFormFileCollection files, string standardImageUrl) 
+		{
+			string imageUrl = standardImageUrl;
+			
 			if (files.Count > 0) 
 			{
 				IFormFile file = files[0];
@@ -49,33 +106,8 @@ namespace complete_gamer_project.Controllers
 				
 				imageUrl = file.FileName;
 			}
-			else 
-			{
-				imageUrl = "standard.png";
-			}
 			
-			
-			Team insertingTeam = new Team(name, imageUrl);
-			
-			context.Add(insertingTeam);
-			context.SaveChanges();
-			
-			return LocalRedirect("~/Team/List");
-		}
-		
-		[Route("Delete/{id}")]
-		public IActionResult Delete(int id) 
-		{
-			Team findedTeam = context.Teams.First(team => team.Id == id);
-			context.Remove(findedTeam);
-			context.SaveChanges();
-			return LocalRedirect("~/Team/List");
-		}
-
-		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-		public IActionResult Error()
-		{
-			return View("Error!");
+			return imageUrl;
 		}
 	}
 }
