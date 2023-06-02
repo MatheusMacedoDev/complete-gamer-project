@@ -21,6 +21,7 @@
         <th>Id</th>
         <th>Nome</th>
         <th>Imagem</th>
+        <th>Ações</th>
     </thead>
     <tbody>
         @foreach(Team team in ViewBag.Teams) {
@@ -29,6 +30,8 @@
                 <td>@team.Name</td>
                 <td>
                     <img src="/img/Teams/@team.Image" alt="Logotipo da equipe" width="50px">
+                </td>
+                <td>
                     <a asp-area="" asp-controller="Team" asp-action="Delete" asp-route-id="@team.Id">Deletar</a>
                 </td>
             </tr>
