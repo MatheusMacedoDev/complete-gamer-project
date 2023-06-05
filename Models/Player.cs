@@ -21,5 +21,22 @@ namespace complete_gamer_project.Models
 		[ForeignKey("Team")]
 		public int TeamId { get; private set; }	
 		public Team Team { get; private set; }
+		
+		public Player(string name, string email, string password, int teamId) 
+		{
+			this.Name = name;
+			this.Email = email;
+			this.Password = password;
+			this.TeamId = teamId;
+		}
+		
+		public Player(int id, string name, string email, string password, int teamId) 
+		{
+			this.Id = id;
+			this.Name = name;
+			this.Email = email;
+			this.Password = password;
+			this.TeamId = teamId;
+		}
 	}
 }

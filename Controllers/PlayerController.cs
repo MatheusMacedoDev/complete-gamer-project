@@ -1,4 +1,5 @@
 using complete_gamer_project.Infra;
+using complete_gamer_project.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace complete_gamer_project.Controllers
@@ -22,6 +23,22 @@ namespace complete_gamer_project.Controllers
 			ViewBag.Teams = context.Teams.ToList();
 			
 			return View();
+		}
+		
+		[Route("Register")]
+		public IActionResult Register(IFormCollection form) 
+		{
+			string name = form["Name"].ToString();
+			string email = form["Email"].ToString();
+			string password = form["Password"].ToString();
+			int teamId = int.Parse(form["Team"].ToString());
+
+			Player player = new Player(name, email, password, teamId);
+
+			context.Add(player);
+			context.SaveChanges();
+
+			return LocalRedirect("~/Player/List");
 		}
 
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
