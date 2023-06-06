@@ -1,0 +1,35 @@
+@model Player
+
+@{
+    ViewData["Title"] = "Editar Jogador";
+}
+
+<form method="post" action='@Url.Action("Update")'>
+    <input type="hidden" name="Id" value="@ViewBag.Player.Id">
+
+    <label for="">Nome</label>
+    <input type="text" name="Name" value="@ViewBag.Player.Name">
+
+    <label for="">E-mail</label>
+    <input type="text" name="Email" value="@ViewBag.Player.Email">
+
+    <label for="">Senha</label>
+    <input type="password" name="Password" value="@ViewBag.Player.Password">
+
+    <label for="">Equipe</label>
+    <select name="Team" value="@ViewBag.Player.TeamId">
+        @foreach (Team team in ViewBag.Teams)
+        {
+            @if (team.Id == ViewBag.Player.TeamId)
+            {
+                <option value="@team.Id" selected>@team.Name</option>
+            } 
+            else
+            {
+                <option value="@team.Id">@team.Name</option>
+            }
+        }
+    </select>
+
+    <button type="submit">Atualizar</button>
+</form>

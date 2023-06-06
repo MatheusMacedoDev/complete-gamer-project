@@ -49,6 +49,34 @@ namespace complete_gamer_project.Controllers
 			context.SaveChanges();
 			return LocalRedirect("~/Player/List");
 		}
+		
+		[Route("Edit/{Id}")]
+		public IActionResult Edit(int id) 
+		{
+			Player findedPlayer = context.Players.First(player => player.Id == id);
+			ViewBag.Player = findedPlayer;
+
+			ViewBag.Teams = context.Teams.ToList();
+
+			return View();
+		}
+		
+		[Route("Update")]
+		public IActionResult Update(IFormCollection form) 
+		{
+			int id = int.Parse(form["Id"].ToString());
+			string name = form["Name"].ToString();
+			string email = form["Email"].ToString();
+			string password = form["Password"].ToString();
+			int teamId = int.Parse(form["Team"].ToString());
+			
+			Player editedPlayer = new Player(id, name, email, password, teamId);
+			
+			context.Players.Update(editedPlayer);
+			context.SaveChanges();
+			
+			return LocalRedirect("~/Player/List");
+		}
 
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error()
