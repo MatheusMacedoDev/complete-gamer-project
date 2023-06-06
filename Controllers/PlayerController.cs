@@ -40,6 +40,15 @@ namespace complete_gamer_project.Controllers
 
 			return LocalRedirect("~/Player/List");
 		}
+		
+		[Route("Delete/{id}")]
+		public IActionResult Delete(int id) 
+		{
+			Player findedPlayer = context.Players.First(player => player.Id == id);
+			context.Remove(findedPlayer);
+			context.SaveChanges();
+			return LocalRedirect("~/Player/List");
+		}
 
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error()
