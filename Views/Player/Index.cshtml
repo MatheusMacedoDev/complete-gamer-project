@@ -16,12 +16,14 @@
     <label for="">Senha:</label>
     <input type="password" name="Password">
 
+    <label for="">Equipe:</label>
     <select name="Team">
         @foreach (Team team in ViewBag.Teams)
         {
             <option value="@team.Id">@team.Name</option>
         }
     </select>
+    
     <button type="submit">Cadastrar</button>
 </form>
 
