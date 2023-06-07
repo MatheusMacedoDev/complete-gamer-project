@@ -1,0 +1,22 @@
+@model Player
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<p>Logged:</p>
+<p>@HttpContextAccessor.HttpContext.Session.GetString("UserName")</p>
+<p>@TempData.Peek("Message")</p>
+
+<h2>Login</h2>
+<form method="post" action='@Url.Action("Login")'>
+    <label for="">E-mail:</label>
+    <input type="text" name="Email">
+
+    <label for="">Senha:</label>
+    <input type="password" name="Password">
+
+    <button type="submit">Logar</button>
+</form>
