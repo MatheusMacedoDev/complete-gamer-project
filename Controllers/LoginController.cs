@@ -55,6 +55,14 @@ namespace complete_gamer_project.Controllers
 				return LocalRedirect("~/Login/LoginArea");
 			}
 		}
+		
+		[Route("Logout")]
+		public IActionResult Logout() 
+		{
+			HttpContext.Session.Remove("UserName");
+			
+			return LocalRedirect("~/Login/Login");
+		}
 
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error()

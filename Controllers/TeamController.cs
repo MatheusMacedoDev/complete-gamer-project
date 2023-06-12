@@ -19,6 +19,10 @@ namespace complete_gamer_project.Controllers
 		[Route("List")]
 		public IActionResult Index()
 		{
+			if (invalidLogin()) {
+				return LocalRedirect("~/Login/LoginArea");
+			}
+			
 			ViewBag.Teams = context.Teams.ToList();
 			return View();
 		}
@@ -26,6 +30,10 @@ namespace complete_gamer_project.Controllers
 		[Route("Register")]
 		public IActionResult Register(IFormCollection form) 
 		{
+			if (invalidLogin()) {
+				return LocalRedirect("~/Login/LoginArea");
+			}
+			
 			string name = form["Name"].ToString();
 			string imageUrl;
 			
@@ -43,6 +51,10 @@ namespace complete_gamer_project.Controllers
 		[Route("Delete/{id}")]
 		public IActionResult Delete(int id) 
 		{
+			if (invalidLogin()) {
+				return LocalRedirect("~/Login/LoginArea");
+			}
+			
 			Team findedTeam = context.Teams.First(team => team.Id == id);
 			context.Remove(findedTeam);
 			context.SaveChanges();
@@ -52,6 +64,10 @@ namespace complete_gamer_project.Controllers
 		[Route("Update")]
 		public IActionResult Update(IFormCollection form)  
 		{
+			if (invalidLogin()) {
+				return LocalRedirect("~/Login/LoginArea");
+			}
+			
 			int id = int.Parse(form["Id"].ToString());
 			string name = form["Name"].ToString();
 			string imageUrl = form["ImageUrl"].ToString(); 
@@ -70,6 +86,10 @@ namespace complete_gamer_project.Controllers
 		[Route("Edit/{id}")]
 		public IActionResult Edit(int id) 
 		{
+			if (invalidLogin()) {
+				return LocalRedirect("~/Login/LoginArea");
+			}
+			
 			Team team = context.Teams.First(team => team.Id == id);
 			
 			ViewBag.Team = team;
@@ -108,6 +128,11 @@ namespace complete_gamer_project.Controllers
 			}
 			
 			return imageUrl;
+		}
+		
+		private bool invalidLogin() 
+		{
+			return HttpContext.Session.GetString("UserName") == null; 
 		}
 	}
 }
