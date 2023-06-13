@@ -4,15 +4,29 @@
     ViewData["Title"] = "Login";
 }
 
-<p>@TempData.Peek("Message")</p>
+<!-- FORMULÁRIO DE LOGIN -->
+<main class="fundo-login">
+    <div class="bkg-login">
+        <form class="frm-login" method="post" action='@Url.Action("Login")'>
+            <div class="login-title">
+                <hr class="login-line">
+                <h1>Login</h1>
+            </div>
+            <div class="frm-linha">
+                <div class="bkg-input">
+                    <img src="~/assets/vector-user.svg" alt="ícone de usuário">
+                    <input type="email" id="email" placeholder="Digite seu e-mail:" name="Email">
+                </div>
+            </div>
+            <div class="frm-linha">
+                <div class="bkg-input">
+                    <img src="~/assets/vector-key.svg" alt="ícone de chave">
+                    <input type="password" id="password" placeholder="Digite sua senha:" name="Password">
+                </div>
+            </div>
 
-<h2>Login</h2>
-<form method="post" action='@Url.Action("Login")'>
-    <label for="">E-mail:</label>
-    <input type="text" name="Email">
+            <button class="btn-logar">Logar</button>
+        </form>
+    </div>
 
-    <label for="">Senha:</label>
-    <input type="password" name="Password">
-
-    <button type="submit">Logar</button>
-</form>
+</main>

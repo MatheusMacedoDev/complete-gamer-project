@@ -4,7 +4,69 @@
     ViewData["Title"] = "Jogador";
 }
 
-<h1>Tela de Jogadores</h1>
+<!-- MAIN -->
+<main>
+
+    <section class="container-grid cadastro-equipes">
+        
+        
+        <form class="frm-cad-equipe" method="post" action='@Url.Action("Register")' >
+            <div class="cadequipe-titulo">
+                <h1>Cadastro de Jogadores</h1>
+                <hr>
+            </div>
+            
+            <input class="campo-entrada" name="Name" type="text" id="nome-jogador" placeholder="Digite o nome do Jogador:">
+            <input class="campo-entrada" name="Email" type="email" id="email-jogador" placeholder="Digite o Email do Jogador:">
+            <input class="campo-entrada" name="Password" type="password" id="senha" placeholder="Digite a Senha:">
+
+            <select class="campo-entrada" name="Team" id="equipe-select">
+                <option value="">Selecione uma Equipe</option>
+                @foreach (Team team in ViewBag.Teams)
+                {
+                    <option value="@team.Id">@team.Name</option>
+                }
+            </select>
+
+            <button type="submit">Cadastrar</button>
+        </form>
+
+        <!-- TABELA CADASTRO DE EQUIPES -->
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>&spades;</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(Player player in ViewBag.Players) {
+                    <tr>
+                        <td>@player.Id</td>
+                        <td>@player.Name</td>
+                        <td>@player.Email</td>
+                        <td>
+                            <img src="/img/Teams/@player.Team.Image" alt="Logotipo da equipe" width="50px">
+                        </td>
+                        <td>
+                            <a asp-area="" asp-controller="Player" asp-action="Delete" asp-route-id="@player.Id">
+                                <img class="yellow-trash" src="~/assets/trash.png" alt="">
+                            </a>
+                        </td>
+                        <td>
+                            <a asp-asp-area="" asp-controller="Player" asp-action="Edit" asp-route-id="@player.Id">Editar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </section>
+</main>
+
+@* <h1>Tela de Jogadores</h1>
 
 <form method="post" action='@Url.Action("Register")' enctype="multipart/form-data">
     <label for="">Nome:</label>
@@ -53,4 +115,4 @@
             </tr>
         }
     </tbody>
-</table>
+</table> *@
