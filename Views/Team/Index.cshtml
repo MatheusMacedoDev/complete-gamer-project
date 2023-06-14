@@ -4,41 +4,63 @@
     ViewData["Title"] = "Equipe";
 }
 
-<h1>Tela de Equipes</h1>
+<!-- MAIN -->
+<main>
+    <section class="container-grid cadastro-equipes">
+        <form class="frm-cad-equipe" method="post" action='@Url.Action("Register")' enctype="multipart/form-data">
+            <div class="cadequipe-titulo">
+                <h1>Cadastro de Equipes</h1>
+                <hr>
+            </div>
 
-<form method="post" action='@Url.Action("Register")' enctype="multipart/form-data">
-    <label for="">Nome</label>
-    <input type="text" name="Name">
+            <input class="campo-entrada" name="Name" type="text" placeholder="Digite o nome da sua equipe:">
 
-    <label for="">Imagem</label>
-    <input type="file" name="Image">
+            <label class="foto" for="foto-file">
+                Nenuma imagem selecionada...
+                <input  type="file" id="foto-file" name="Image">
+            </label>
+            
+            <button type="submit">Cadastro</button>
+            
+            
+            
+            <!-- <select class="equipeid" id="equipeid">
+                <option value="">Selecione uma Equipe</option>
+                <option value="x">Equipe X</option>
+                <option value="y">Equipe Y</option>
+            </select> -->
+        </form>
 
-    <button type="submit">Cadastrar</button>
-</form>
+        <!-- TABELA CADASTRO DE EQUIPES -->
 
-<table class="table table-striped table-responsive">
-    <thead>
-        <th>Id</th>
-        <th>Nome</th>
-        <th>Imagem</th>
-        <th>Ações</th>
-    </thead>
-    <tbody>
-        @foreach(Team team in ViewBag.Teams) {
-            <tr>
-                <td>@team.Id</td>
-                <td>@team.Name</td>
-                <td>
-                    <img src="/img/Teams/@team.Image" alt="Logotipo da equipe" width="50px">
-                </td>
-                <td>
-                    <a asp-area="" asp-controller="Team" asp-action="Delete" asp-route-id="@team.Id">Deletar</a>
-                </td>
-                <td>
-                    <a asp-area="" asp-controller="Team" asp-action="Edit" asp-route-id="@team.Id">Editar</a>
-                </td>
-            </tr>
-        }
-
-    </tbody>
-</table>
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Foto</th>
+                    <th>&spades;</th>
+                </tr>
+            </thead>
+            <tbody>
+                 @foreach(Team team in ViewBag.Teams) {
+                    <tr>
+                        <td>@team.Id</td>
+                        <td>@team.Name</td>
+                        <td>
+                            <img src="/img/Teams/@team.Image" alt="Logotipo da equipe" width="50px">
+                        </td>
+                        <td>
+                            <a asp-area="" asp-controller="Team" asp-action="Delete" asp-route-id="@team.Id">
+                                <img class="yellow-trash" src="~/assets/trash.png" alt="">
+                            </a>
+                        </td>
+                        <td>
+                            <a asp-area="" asp-controller="Team" asp-action="Edit" asp-route-id="@team.Id">Editar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </section>
+</main>

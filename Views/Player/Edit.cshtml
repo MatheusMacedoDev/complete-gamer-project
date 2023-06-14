@@ -4,7 +4,39 @@
     ViewData["Title"] = "Editar Jogador";
 }
 
-<form method="post" action='@Url.Action("Update")'>
+<main>
+    <section class="container-grid cadastro-equipes">
+        <form class="frm-cad-equipe" method="post" action='@Url.Action("Update")' >
+            <div class="cadequipe-titulo">
+                <h1>Cadastro de Jogadores</h1>
+                <hr>
+            </div>
+            
+            <input type="hidden" name="Id" value="@ViewBag.Player.Id">
+            <input class="campo-entrada" name="Name" type="text" id="nome-jogador" value="@ViewBag.Player.Name">
+            <input class="campo-entrada" name="Email" type="email" id="email-jogador" value="@ViewBag.Player.Email">
+            <input class="campo-entrada" name="Password" type="password" id="senha" value="@ViewBag.Player.Password">
+
+            <select class="campo-entrada" name="Team" id="equipe-select" value="@ViewBag.Player.TeamId">
+                @foreach (Team team in ViewBag.Teams)
+                {
+                    @if (team.Id == ViewBag.Player.TeamId)
+                    {
+                        <option value="@team.Id" selected>@team.Name</option>
+                    } 
+                    else
+                    {
+                        <option value="@team.Id">@team.Name</option>
+                    }
+                }
+            </select>
+
+            <button type="submit">Cadastrar</button>
+        </form>
+    </section>
+</main>
+
+@* <form method="post" action='@Url.Action("Update")'>
     <input type="hidden" name="Id" value="@ViewBag.Player.Id">
 
     <label for="">Nome:</label>
@@ -32,4 +64,4 @@
     </select>
 
     <button type="submit">Atualizar</button>
-</form>
+</form> *@

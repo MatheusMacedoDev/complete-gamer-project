@@ -3,7 +3,7 @@
 /* Main */
 
 main {
-    margin-top: 60px;
+    /* margin-top: 60px; */
     height: 1403px;
     background-image: url(../assets/fundo-jogadores-mobile.png);
     background-size: contain;
@@ -233,7 +233,10 @@ main .cadastro-equipes table td img.yellow-trash {
     width: 15px;
 }
 
-
+main .cadastro-equipes table td a {
+    color: #F9AA01;
+    text-decoration: none;
+}
 
 /* Desktop */
 @media screen and (min-width: 992px) {
