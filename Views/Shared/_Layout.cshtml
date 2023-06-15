@@ -185,8 +185,10 @@
             &#169;Copyright2022-GamerJogosDigitais
         </div>
 
-        <img class="back-to-top-button" src="~/assets/Botao_voltar_ao_topo.svg" id="back-to-top" alt="Voltar ao Topo">
+        <img onclick="clickReturnTop()" class="back-to-top-button" src="~/assets/Botao_voltar_ao_topo.svg" id="back-to-top" alt="Voltar ao Topo">
     </footer>
+
+    <script src="~/js/site.js"></script>
     
     @await RenderSectionAsync("Scripts", required: false)
 </body>

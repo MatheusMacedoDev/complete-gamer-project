@@ -159,6 +159,7 @@ body {
 .frm-login .frm-linha input {
     width: 85%;
     height: 40px;
+    color: #fff;
     background-color: transparent;
     font-family: TitilliumWeb-Regular;
     font-size: 16px;
